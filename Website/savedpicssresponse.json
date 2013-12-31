@@ -1,0 +1,16 @@
+{
+    "picss": {
+        "name": "{{ @picss.name }}",
+        "label": "{{ @picss.label }}",
+        <check if="{{ isset(@picss.tags) }}">
+        "tags": {
+                <repeat group="{{ @picss.tags }}"  value="{{ @tag }}">
+                    "tag": "{{ @tag }}",
+                </repeat>
+        },
+        </check>
+		<check if="{{ isset(@picss.image) }}">
+        "image": "{{ @picss.image }}"
+        </check>
+    }
+}

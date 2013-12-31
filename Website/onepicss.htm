@@ -1,0 +1,25 @@
+<ol>
+	<li>
+		<b>{{ @picss.name }}</b>
+		<ul>
+			<li>{{ @picss.label }}</li>
+			<check if="{{ isset(@picss.tags) }}">
+				<li>
+					<repeat group="{{ @picss.tags }}"  value="{{ @tag }}">
+					{{ @tag }}, 
+					</repeat>
+				</li>
+			</check>
+			<check if="{{ isset(@picss.image) }}">
+				<li><img src="{{ '/uploads/'.@picss.image }}" alt="{{ @picss.label }}" />
+			</check>
+		</ul>
+	</li>
+	<check if="{{ isset(@picss.sound) }}">
+		<li>
+			<audio src="{{ '/uploads/'.@picss.sound }}" controls>
+				<p>Your browser does not support the audio element.</p>
+			</audio>
+		</li>
+	</check>
+</ol>
