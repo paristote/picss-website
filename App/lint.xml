@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="InlinedApi">
+        <ignore path="src/com/philipoy/picss/profiles/ProfileSDKFrom10.java" />
+    </issue>
+</lint>
