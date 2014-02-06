@@ -1,0 +1,18 @@
+<h1>Picss</h1>
+<ol>
+<repeat group="{{ @items }}" value="{{ @item }}">
+		<li>
+			<a href="/picss/{{ @item._id }}"><b>{{ @item.name }}</b></a>
+			<ul>
+				<li>{{ @item.label }}</li>
+				<check if="{{ isset(@item.tags) }}">
+					<li>
+						<repeat group="{{ @item.tags }}"  value="{{ @tag }}">
+						{{ @tag }},
+						</repeat>
+					</li>
+				</check>
+			</ul>
+		</li>
+</repeat>
+</ol>

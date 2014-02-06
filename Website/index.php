@@ -1,28 +1,25 @@
 <?php
-
+// loads fat free framework in the variable $f3
 $f3 = require('fff/base.php');
 
-// the Picss controller
-// TODO move to a separate folder with other model / controller classes
-require('Picss.php');
+// debug mode, remove before putting in prod
+$f3->set('DEBUG',3);
 
+// An object oriented PHP driver for FFMpeg binary
+// https://github.com/alchemy-fr/PHP-FFmpeg/tree/0.4.4
+// require('FFMpeg/FFMpeg.php');
+
+$f3->set('AUTOLOAD', 'app/'); // loads all classes in the app/ directory
 $f3->set('UPLOADS','uploads/'); // don't forget to set an Upload directory, and make it writable!
 $f3->set('TEMP','tmp/'); // don't forget to set an Temp directory, and make it writable!
+$f3->set('UI','views/'); // don't forget to set an Temp directory, and make it writable!
 
-// route / to /picss
-$f3->route('GET /',
-	       function($f3) {
-	       	$f3->reroute('/picss');	
-	       });
+// home page
+$f3->route('GET /', 'Home->showIndex');
 
-// map HTTP methods to Picss methods
-$f3->map('/picss/@name','Picss');
-
-// front page
-$f3->route('GET /picss', 'Picss->getAll');
-
-// add picss
-$f3->route('POST /picss', 'Picss->post');
+// map HTTP methods (GET, POST, etc) to methods in the Picss class
+$f3->map('/picss/@id','Picss');
+$f3->map('/picss','Picss');
 
 $f3->run();
 

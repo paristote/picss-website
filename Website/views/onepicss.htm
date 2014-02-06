@@ -17,7 +17,7 @@
 	</li>
 	<check if="{{ isset(@picss.sound) }}">
 		<li>
-			<audio src="{{ '/uploads/'.@picss.sound }}" controls>
+			<audio src="{{ @uploadsDir.@picss.sound }}" controls autoplay>
 				<p>Your browser does not support the audio element.</p>
 			</audio>
 		</li>
