@@ -28,14 +28,15 @@ class Picss extends AppBase {
 			else // otherwise we set the uploads dir to where sounds are uploaded
 				$f3->set('uploadsDir', "/".$f3->get('UPLOADS'));
 			// set the page title after the Picss name
-			$f3->set('pageTitle', 'Picss :: '.$picss->get('name'));
+			$f3->set('pageTitle', ':Picss: '.$picss->get('name'));
 			// set the layout file
-			$f3->set('content', 'onepicss.htm');	
+			$f3->set('content', 'onepicss.htm');
+			$f3->set('pageCss', 'onepicss.css');
 		}
 		else // if no Picss was found, show a page not found message
 		{
 			$f3->set('id', $id);
-			$f3->set('pageTitle', 'Picss :: Not found');
+			$f3->set('pageTitle', ':( Not found');
 			$f3->set('content', 'notfound.htm');	
 		}
 	}
@@ -52,10 +53,6 @@ class Picss extends AppBase {
 		{
 			// Name is required
 		}
-		elseif (!$f3->exists('POST.label') || !strlen($f3->get('POST.label')))
-		{
-			// Label is required
-		}
 		else
 		{
 			$db=$this->db;
@@ -63,6 +60,8 @@ class Picss extends AppBase {
 			// set the newpicss attributes with those existing in the POST request
 			$newpicss->set('name', $f3->get('POST.name'));
 			$newpicss->set('label', $f3->get('POST.label'));
+			$newpicss->set('date', time());
+			$newpicss->set('ip', $f3->get('IP'));
 			// move uploaded files to the UPLOADS dir (i.e. /uploads)
 			$web = \Web::instance();
 			$files = $web->receive(
