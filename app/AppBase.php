@@ -17,7 +17,7 @@ class AppBase {
 	 */
 	function __construct() {
 		$f3=Base::instance();
-		$db=new DB\Mongo('mongodb://localhost:27017','test');
+		$db=new DB\Mongo('mongodb://uc2vqr8kdj1ptt9e:8c88422484594258899dd812da5b66e3@bgpm2hfn7h84i9dl.mongo.clvrcld.net/bgpm2hfn7h84i9dl','bgpm2hfn7h84i9dl');
 		$this->db=$db;
 	}
 
