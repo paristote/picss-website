@@ -7,6 +7,8 @@ $f3 = require('fff/base.php');
 // CONFIG
 // debug mode, remove before putting in prod
 $f3->set('DEBUG',3);
+$f3->config('setup.cfg');
+
 
 $f3->set('AUTOLOAD', 'app/'); // loads all classes in the app/ directory
 $f3->set('UPLOADS','uploads/'); // uploaded files go here after validation

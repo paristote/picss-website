@@ -17,7 +17,15 @@ class AppBase {
 	 */
 	function __construct() {
 		$f3=Base::instance();
-		$db=new DB\Mongo('mongodb://localhost:27017','test');
+		$dbuser=$f3->get('dbuser');
+		$dbpass=$f3->get('dbpass');
+		$dbhost=$f3->get('dbhost');
+		$dbname=$f3->get('dbname');
+		$connect=$dbhost."/".$dbname;
+		if (!empty($dbuser) && !empty($dbpass)) {
+			$connect = $dbuser.":".$dbpass."@".$connect;
+		}
+		$db=new DB\Mongo('mongodb://'.$connect,$dbname);
 		$this->db=$db;
 	}
 
