@@ -18,6 +18,10 @@ $f3->set('UI','views/'); // contains all the html views and json response format
 // ROUTES
 // home page
 $f3->route('GET /', 'Home->showIndex');
+// register beta form action url
+$f3->route('POST /register', 'Home->registerBeta');
+// thank you message, automatically called after /register
+$f3->route('GET /thankyou', 'Home->thankyou');
 // $f3->route('GET /', 'Home->showIndex');
 // $f3->route('GET /@p', 'Home->showIndex');
 

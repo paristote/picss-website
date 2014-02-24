@@ -27,13 +27,18 @@
           <div class="mastfoot">
             <div class="inner">
             	<p>Leave us your email and we'll let you know when you can try it yourself:</p>
-            	<form class="form-inline" role="form">
-				  <div class="form-group">
-				    <label class="sr-only" for="register-email">Email address</label>
-				    <input type="email" class="form-control" id="register-email" placeholder="Enter email" data-toggle="tooltip" title="Your email ">
-				  </div>
-				  <button type="submit" class="btn btn-default">Tell me more</button>
-				</form>
+            	<form class="form-inline" role="form" action="/register" method="POST">
+      				  <div class="form-group">
+      				    <label class="sr-only" for="register-email">Email address</label>
+      				    <input type="email" name="register-email" class="form-control" id="register-email" placeholder="Enter email" data-toggle="tooltip" title="Your email will be kept safe">
+      				  </div>
+      				  <button type="submit" class="btn btn-default">Tell me more</button>
+                <check if="{{ isset(@thankyou) }}">
+                <span class="label label-success">
+                  Thank you!
+                </span>
+                </check>
+      				</form>
               <p>2014 - Picss</p>
             </div>
           </div>
