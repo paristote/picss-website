@@ -22,12 +22,12 @@ $f3->route('GET /', 'Home->showIndex');
 $f3->route('POST /register', 'Home->registerBeta');
 // thank you message, automatically called after /register
 $f3->route('GET /thankyou', 'Home->thankyou');
-// $f3->route('GET /', 'Home->showIndex');
-// $f3->route('GET /@p', 'Home->showIndex');
+$f3->route('GET /bbb', 'Home->browse');
+$f3->route('GET /bbb/@p', 'Home->browse');
 
 // map HTTP methods (GET, POST, etc) to methods in the Picss class
-$f3->map('/picss/@id','Picss');
-$f3->map('/picss','Picss');
+$f3->map('/p/@id','Picss');
+$f3->map('/p','Picss');
 
 $f3->run();
 

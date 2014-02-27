@@ -2,67 +2,68 @@
 <check if="{{ isset(@picss.image) }}">	
 	<img class="picss-image-bg" src="{{ '/uploads/'.@picss.image }}" alt="{{ @picss.label }}" style="opacity: 0.1;" />
 
-	<div class="site-wrapper">
-
-      <div class="site-wrapper-inner">
-
-        <div class="cover-container">
-
-        	<div class="masthead clearfix">
-            	<div class="inner">
-              		<span class="back-button overlay">
-					<a href="/">
-						<img class="img-circle" src="/resources/images/icon-back.png" />
-					</a>
-					</span>
-            	</div>
-          	</div>
-
-	        <div class="inner cover">
-	        	<h1 class="cover-heading">{{ @picss.name }}</h1>
-				<a id="picss-image-link" href="{{ '/uploads/'.@picss.image }}" title="{{ @picss.name }}">
-					<img class="picss-image img-rounded" src="{{ 'uploads/'.@picss.image }}" alt="{{ @picss.label }}" />
-				</a>
-			</div>
-
-			<div class="mastfoot">
-	            <div class="inner overlay">
-
-						<span class="mute-button">
-							<a href="#">
-								<img src="/resources/images/icon-sound-on.png" />
-							</a>
-						</span>
-						<span class="play-button">
-							<a href="#">
-								<img src="/resources/images/icon-stop-dark.png" />
-							</a>
-						</span>
-						<span class="star-button">
-							<a href="#">
-								<img src="/resources/images/icon-star-empty.png" />
-							</a>
-						</span>
-						<check if="{{ isset(@picss.label) }}">
-						<span class="picss-label">
-							{{ @picss.label }}
-						</span>
-						</check>
-						<span>
-							<a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode('http://'.@HOST.'/picss/'.@picss._id) }}" target="_blank">Fb</a>
-						</span>
-						<span>
-							<a href="https://twitter.com/share?url={{ urlencode('http://'.@HOST.'/picss/'.@picss._id) }}" target="_blank">Tweet</a>
-						</span>
-
-				</div>
-			</div>
-	
-		</div>
-
+	<div class="row">
+      <div class="col-md-1 back-button top-row">
+        <a href="/"><img class="img-circle" src="/resources/images/icon-back.png" /></a>
       </div>
+      <div class="col-md-1 gap top-row">
+  	  </div>
+      <div class="col-md-8 picss-title top-row">
+      	<h2>{{ ucwords(@picss.name) }}</h2>
+      </div>
+    </div>
 
-  	</div>
+    <div class="row">
+    	<div class="col-md-1">
+  		</div>
+    	<div class="col-md-1 controls">
+    		<span class="mute-button">
+				<a href="#">
+					<img src="/resources/images/icon-sound-on.png" alt="volume" />
+				</a>
+			</span>
+			<span class="play-button">
+				<a href="#">
+					<img src="/resources/images/icon-stop-white-48.png" alt="control" />
+				</a>
+			</span>
+			<!-- <span class="star-button">
+				<a href="#">
+					<img src="/resources/images/icon-star-empty.png" alt="like" />
+				</a>
+			</span> -->
+			<span class="facebook-button">
+				<a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode('http://'.@HOST.'/picss/'.@picss._id) }}" target="_blank">
+					<img src="/resources/images/icon-facebook.png" alt="Facebook" />
+				</a>
+			</span>
+			<span class="twitter-button">
+				<a href="https://twitter.com/share?url={{ urlencode('http://'.@HOST.'/picss/'.@picss._id) }}" target="_blank">
+					<img src="/resources/images/icon-twitter.png" alt="Twitter" />
+				</a>
+			</span>
+    	</div>
+    	<div class="col-md-8 picss-image">
+    		<a id="picss-image-link" href="{{ '/uploads/'.@picss.image }}" title="{{ ucwords(@picss.name) }}">
+				<img class="picss-image" src="{{ '/uploads/'.@picss.image }}" alt="{{ @picss.label }}" />
+			</a>
+    	</div>
+    </div>
+
+  	<div id="row">
+  		<div class="col-md-1">
+  		</div>
+  		<div class="col-md-1">
+  		</div>
+		<div class="col-md-8 picss-label">
+			<check if="{{ isset(@picss.label) }}">
+			<!-- <span>
+				{{ ucwords(@picss.label) }}
+			</span> -->
+			</check>
+			
+      	</div>
+    </div>
 
 	<check if="{{ isset(@picss.sound) }}">
 		<audio id="picss-audio" src="{{ @uploadsDir.@picss.sound }}" autoplay>
@@ -78,12 +79,12 @@
 	/* Play / Pause control */
 	$( ".play-button" ).click(function(event) {
 		if (isPlaying) { // pause
-			$( ".play-button img" ).attr('src', '/resources/images/icon-play-dark.png');
+			$( ".play-button img" ).attr('src', '/resources/images/icon-play-white-48.png');
 			picssAudio.pause();
 			isPlaying = false;
 		}
 		else { // resume
-			$( ".play-button img" ).attr('src', '/resources/images/icon-stop-dark.png');
+			$( ".play-button img" ).attr('src', '/resources/images/icon-stop-white-48.png');
 			picssAudio.play();
 			isPlaying = true;
 		}
@@ -99,6 +100,12 @@
 			picssAudio.muted = true;
 		}
 	});
+
+	picssAudio.addEventListener("ended", function() { 
+		$( ".play-button img" ).attr('src', '/resources/images/icon-play-white-48.png');
+		isPlaying = false;
+	 }, true);
+
 
 	$(document).ready(function() {
 		$("#picss-image-link").fancybox({
