@@ -1,6 +1,6 @@
 <body class="onepicss">
 <check if="{{ isset(@picss.image) }}">	
-	<img class="picss-image-bg" src="{{ '/uploads/'.@picss.image }}" alt="{{ @picss.label }}" style="opacity: 0.1;" />
+	<img class="picss-image-bg" src="{{ '/data/'.@picss.image }}" alt="{{ @picss.label }}" style="opacity: 0.1;" />
 
 	<div class="row">
       <div class="col-md-1 back-button top-row">
@@ -44,8 +44,8 @@
 			</span>
     	</div>
     	<div class="col-md-8 picss-image">
-    		<a id="picss-image-link" href="{{ '/uploads/'.@picss.image }}" title="{{ ucwords(@picss.name) }}">
-				<img class="picss-image" src="{{ '/uploads/'.@picss.image }}" alt="{{ @picss.label }}" />
+    		<a id="picss-image-link" href="{{ '/data/'.@picss.image }}" title="{{ ucwords(@picss.name) }}">
+				<img class="picss-image" src="{{ '/data/'.@picss.image }}" alt="{{ @picss.label }}" />
 			</a>
     	</div>
     </div>
