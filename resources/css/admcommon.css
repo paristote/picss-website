@@ -1,0 +1,23 @@
+.categories {
+	position: absolute;
+	float: left;
+	max-width: 200px;
+	border-right: solid black 2px;
+	padding: 0 15px;
+}
+
+.iframe {
+	position: absolute;
+	float: right;
+	left: 220px;
+}
+
+.iframe iframe {
+	width: 800px;
+	height: 800px;
+	border: none;
+}
+
+.iframe table img {
+	border: solid #FFBB33 2px;
+}
