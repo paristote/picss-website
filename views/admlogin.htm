@@ -1,0 +1,16 @@
+<body class="admlogin">
+	<form method="post" action="/auth" class="login">
+		<h3>Login</h3>
+		<p class="row">
+			<label class="pull-left" for="user_id"><small>User</small></label>
+			<input class="pull-right" id="user_id" name="user_id" type="text" {{ isset(@POST.user_id)?('value="'.@POST.user_id.'"'):'' }} />
+		</p>
+		<p class="row">
+			<label class="pull-left" for="password"><small>Password</small></label>
+			<input class="pull-right" id="password" name="password" type="password" />
+		</p>
+		<p class="row">
+			<input type="submit" value="Sign-in" />
+		</p>
+	</form>
+</body>

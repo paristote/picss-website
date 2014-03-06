@@ -25,6 +25,21 @@ $f3->route('GET /thankyou', 'Home->thankyou');
 $f3->route('GET /bbb', 'Home->browse');
 $f3->route('GET /bbb/@p', 'Home->browse');
 
+// login / logout
+$f3->route('GET /login', 'Login->loginAdmin');
+$f3->route('POST /auth', 'Login->authAdmin');
+$f3->route('GET /logout', 'Login->logout');
+// admin
+$f3->route('GET /aaa', 'Admin->main');
+$f3->route('GET /aaa/picss', 'Admin->picss');
+$f3->route('GET /aaa/picss/@pid', 'Admin->picss');
+$f3->route('GET /aaa/picss/@pid/d', 'Admin->deletePicss');
+
+$f3->route('GET /aaa/users', 'Admin->users');
+$f3->route('GET /aaa/users/@uid', 'Admin->users');
+
+
+
 // map HTTP methods (GET, POST, etc) to methods in the Picss class
 $f3->map('/p/@id','Picss');
 $f3->map('/p','Picss');

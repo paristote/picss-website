@@ -67,7 +67,8 @@ class Picss extends AppBase {
 			$files = $web->receive(
 				function($file){
 					// TODO check the size of the audio file and the photo
-					// TODO convert audio and resize photo here
+					// TODO send request to Zencoder
+					// TODO resize photo here
         			return true; // allows the file to be moved from php tmp dir to the defined upload dir
     			}
 			);
@@ -87,6 +88,7 @@ class Picss extends AppBase {
 				// just move it to the newly created directory
 				$image = $f3->get('FILES')["image"];
 				$imageFile = $id."/img-".$id.".jpg";
+				// TODO use lower case values only
 				rename($uploadsDir.$image['name'], $uploadsDir.$imageFile);
 				// set the image attribute in the Picss object
 				$newpicss->set('image', $imageFile);

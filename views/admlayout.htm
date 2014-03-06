@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>{{ @pageTitle }}</title>
+		<link rel="stylesheet" href="/resources/css/admcommon.css" type="text/css" />
+	</head>
+	<body class="admin">
+		<div class="categories">
+			<h1>Categories</h1>
+			<h3>LATESTS</h3>
+			<p>
+				<ul>
+				<repeat group="{{ @latestPicss }}" value="{{ @item }}">
+					<li><a href="/aaa/picss/{{ @item._id }}">{{ @item.name }}</a></li>
+				</repeat>
+				</ul>
+				<a href="/aaa/picss">All...</a>
+			</p>
+			<h3>BETA USERS</h3>
+			<p>
+				<ul>
+				<repeat group="{{ @latestBetaUsers }}" value="{{ @item }}">
+					<li><a href="/aaa/users/{{ @item._id }}">{{ @item.email }}</a></li>
+				</repeat>
+				</ul>
+				<a href="/aaa/users">All...</a>
+			</p>
+			<h3>LOGOUT</h3>
+			<p><a href="/logout">Bye bye</a></p>
+		</div>
+		<div class="iframe">
+			<include href="{{ @content }}" />
+		</div>
+	</body>
+</html>

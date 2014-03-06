@@ -1,0 +1,18 @@
+<h2>All Users</h2>
+<ul>
+<repeat group="{{ @items }}" value="{{ @item }}">
+
+	<li><a href="/aaa/users/{{ @item._id }}">{{ @item.email }}</a></li>
+
+</repeat>
+</ul>
+<check if="{{ isset(@users) }}">
+<h2>{{ @users.email }}</h2>
+<table>
+	<thead><td>DETAILS</td><td><a href="{{ @users._id }}/d">Delete</a></td></thead>
+	<tr><td>Id:</td><td>{{ @users._id }}</td></tr>
+	<tr><td>Date:</td><td><check if="{{ isset(@users.date) }}">{{ date("D, d M Y", @users.date) }}</check></td></tr>
+	<tr><td>IP:</td><td><check if="{{ isset(@users.ip) }}">{{ @users.ip }}</check></td></tr>
+</table>
+</check>
+</ul>
