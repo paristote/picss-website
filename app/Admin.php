@@ -51,12 +51,24 @@ class Admin extends AdminBase {
 		$picss->load(array('_id' => new MongoId($pid)));
 		if (!$picss->dry()) {
 			$picss->erase();
+			$uploadsDir = realpath('.')."/".$f3->get('UPLOADS');
+			if (file_exists($uploadsDir.$pid)) {
+				$this->delTree($uploadsDir.$pid);
+			}
 			$message = "Picss erased succesfully.";
 		}
 
 		$f3->reroute('/aaa/picss/');
 
 	}
+
+	function delTree($dir) { 
+   		$files = array_diff(scandir($dir), array('.','..')); 
+    	foreach ($files as $file) { 
+      		(is_dir("$dir/$file")) ? delTree("$dir/$file") : unlink("$dir/$file"); 
+    	} 
+    	return rmdir($dir); 
+  } 
 
 	function hidePicss($f3, $args) {
 

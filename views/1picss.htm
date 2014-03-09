@@ -1,31 +1,46 @@
 <body class="onepicss">
 <check if="{{ isset(@picss.image) }}">	
-	<img class="picss-image-bg" src="{{ '/data/'.@picss.image }}" alt="{{ @picss.label }}" style="opacity: 0.1;" />
+	<img class="picss-image-bg" src="{{ '/data/'.@picss.image }}" alt="{{ @picss.label }}" style="opacity: 0.05;" />
 
 	<div class="row">
-      <div class="col-md-1 back-button top-row"><!-- 1. back button -->
-        <a href="/"><img class="img-circle" src="/resources/images/icon-back.png" /></a>
-      </div>
-      <div class="col-md-1 gap top-row"><!-- 2. gap -->
-  	  </div>
-      <div class="col-md-8 picss-title top-row"><!-- 3. Picss name -->
-      	<h2>{{ ucwords(@picss.name) }}</h2>
-      </div>
-    </div>
+		<div class="col-md-1 back-button top-row"><!-- 1. back button -->
+        	<a href="/"><img class="img-circle" src="/resources/images/icon-back.png" /></a>
+    	</div>
+    	<div class="col-md-6 gap top-row"><!-- 2. gap -->
+  	  	</div>
+  	  	<div class="col-md-2 gap top-row"><!-- 2. gap -->
+  	  	</div>
+	</div>
 
-    <div class="row">
-    	<div class="col-md-1"><!-- 1. gap -->
-  		</div>
-    	<div class="col-md-1 controls"><!-- 2. controls -->
+	<div class="row">
+		<div class="col-md-1 gap"><!-- 2. gap -->
+  	  	</div>
+  	  	<div class="col-md-6 picss-image"><!-- 3. photo -->
+    		<a id="picss-image-link" href="{{ '/data/'.@picss.image }}" title="{{ ucwords(@picss.name) }}">
+				<img class="picss-image" src="{{ '/data/'.@picss.image }}" alt="{{ @picss.label }}" />
+			</a>
+    	</div>
+    	<div class="col-md-2 gap"><!-- 2. gap -->
+  	  	</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-1 gap"><!-- 2. gap -->
+  	  	</div>
+  	  	<div class="col-md-6 gap"><!-- 2. gap -->
+  	  	</div>
+  	  	<div class="col-md-2 controls"><!-- 2. controls -->
+  	  		<span class="h2">{{ ucwords(@picss.name) }}</span><br/>
+  	  		<!-- <check if="{{ isset(@picss.label) }}">
+			<span>
+				{{ ucwords(@picss.label) }}
+			</span><br/>
+			</check> -->
     		<span class="mute-button">
-				<a href="#">
-					<img src="/resources/images/icon-sound-on.png" alt="volume" />
-				</a>
+				<a href="#"><img src="/resources/images/icon-sound-on.png" alt="volume" /></a>
 			</span>
 			<span class="play-button">
-				<a href="#">
-					<img src="/resources/images/icon-stop-white-48.png" alt="control" />
-				</a>
+				<a href="#"><img src="/resources/images/icon-stop-white-48.png" alt="control" /></a>
 			</span>
 			<!-- <span class="star-button">
 				<a href="#">
@@ -33,37 +48,13 @@
 				</a>
 			</span> -->
 			<span class="facebook-button">
-				<a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode('http://'.@HOST.'/p/'.@picss._id) }}" target="_blank">
-					<img src="/resources/images/icon-facebook.png" alt="Facebook" />
-				</a>
+				<a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode('http://'.@HOST.'/p/'.@picss._id) }}" target="_blank"><img src="/resources/images/icon-facebook.png" alt="Facebook" /></a>
 			</span>
 			<span class="twitter-button">
-				<a href="https://twitter.com/share?url={{ urlencode('http://'.@HOST.'/p/'.@picss._id) }}" target="_blank">
-					<img src="/resources/images/icon-twitter.png" alt="Twitter" />
-				</a>
+				<a href="https://twitter.com/share?url={{ urlencode('http://'.@HOST.'/p/'.@picss._id) }}" target="_blank"><img src="/resources/images/icon-twitter.png" alt="Twitter" /></a>
 			</span>
     	</div>
-    	<div class="col-md-8 picss-image"><!-- 3. photo -->
-    		<a id="picss-image-link" href="{{ '/data/'.@picss.image }}" title="{{ ucwords(@picss.name) }}">
-				<img class="picss-image" src="{{ '/data/'.@picss.image }}" alt="{{ @picss.label }}" />
-			</a>
-    	</div>
-    </div>
-
-  	<div id="row">
-  		<div class="col-md-1"><!-- 1. gap -->
-  		</div>
-  		<div class="col-md-1"><!-- 2. gap -->
-  		</div>
-		<div class="col-md-8 picss-label"><!-- 3. labels -->
-			<check if="{{ isset(@picss.label) }}">
-			<!-- <span>
-				{{ ucwords(@picss.label) }}
-			</span> -->
-			</check>
-			
-      	</div>
-    </div>
+	</div>
 
 	<check if="{{ isset(@picss.sound) }}">
 		<audio id="picss-audio" src="{{ @uploadsDir.@picss.sound }}" autoplay>

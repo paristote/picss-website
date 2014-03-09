@@ -28,8 +28,9 @@ body {
 }
 
 .controls {
-  /*background-color: #FFBB33;*/
-  /*border-left: 4px solid #33B5E5;*/
+  background-color: #FFBB33;
+  text-align: center;
+  padding-bottom: 3px;
 }
 
 .controls img {
@@ -38,10 +39,10 @@ body {
 }
 
 .controls img:hover {
-  /*padding-top: 2px;
-  padding-bottom: 13px;*/
+  padding: 5px;
+  /*padding-bottom: 13px;*/
   /*background-color: #FF8800;*/
-  border-left: 4px solid #FFBB33;
+  border: 2px solid white;
 }
 
 .picss-image {

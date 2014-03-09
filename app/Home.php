@@ -22,15 +22,19 @@ class Home extends AppBase {
 	function registerBeta($f3) {
 		$users=new DB\Mongo\Mapper($this->db,'betausers');
 
-		$users->load(array('email'=>$f3->get('POST.register-email')));
-		if ($users->dry()) {
-			// save the email only if it does not already exist
-			$users->set('email', $f3->get('POST.register-email'));
-			$users->set('date', time());
-			$users->set('ip', $f3->get('IP'));
-			$users->save();
-		}
+		$email = $f3->get('POST.register-email');
+		
+		if (isset($email) && !empty($email)) {
 
+			$users->load(array('email' => $email));
+			if ($users->dry()) {
+				// save the email only if it does not already exist
+				$users->set('email', $email);
+				$users->set('date', time());
+				$users->set('ip', $f3->get('IP'));
+				$users->save();
+			}
+		}
 		$f3->reroute('/thankyou');
 	}
 

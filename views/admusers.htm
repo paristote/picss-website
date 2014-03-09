@@ -8,11 +8,14 @@
 </ul>
 <check if="{{ isset(@users) }}">
 <h2>{{ @users.email }}</h2>
-<table>
-	<thead><td>DETAILS</td><td><a href="{{ @users._id }}/d">Delete</a></td></thead>
+<table class="table table-striped">
+	<thead><th colspan="2">DETAILS</th></thead>
 	<tr><td>Id:</td><td>{{ @users._id }}</td></tr>
 	<tr><td>Date:</td><td><check if="{{ isset(@users.date) }}">{{ date("D, d M Y", @users.date) }}</check></td></tr>
 	<tr><td>IP:</td><td><check if="{{ isset(@users.ip) }}">{{ @users.ip }}</check></td></tr>
 </table>
+<a class="btn btn-danger" role="button" href="{{ @users._id }}/d">
+	<span class="glyphicon glyphicon-remove"></span> Delete
+</a>
 </check>
 </ul>

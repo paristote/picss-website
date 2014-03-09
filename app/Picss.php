@@ -14,10 +14,20 @@ class Picss extends AppBase {
 	function get($f3, $args) {
 		$picss=new DB\Mongo\Mapper($this->db,'picss');
 		// get the ID from the arguments passed in the URL
-		$id=empty($args['id'])?'':$args['id'];
-		// load a Picss object by its ID
-		$picss->load(array('_id' => new MongoId($id)));
-								 // new MongoId : http://www.slideshare.net/spf13/mongodb-and-php-zendcon-2011 slide 49
+		if (isset($args['id']) && !empty($args['id'])) {
+			$id = trim($args['id']);
+
+			// load a Picss object by its URL ID
+			$picss->load(array('urlId' => $id));
+
+			if ($picss->dry()) {
+				try {
+				    $picss->load(array('_id' => new MongoId($id)));
+				    // http://php.net/manual/en/class.mongoid.php
+				} catch (MongoException $ex) {}
+			}
+		}
+
 		if (!$picss->dry()) // if the Picss object exists
 		{
 			$f3->set('picss', $picss);
@@ -30,12 +40,11 @@ class Picss extends AppBase {
 			// set the page title after the Picss name
 			$f3->set('pageTitle', ':Picss: '.$picss->get('name'));
 			// set the layout file
-			$f3->set('content', 'onepicss.htm');
+			$f3->set('content', '1picss.htm');
 			$f3->set('pageCss', 'onepicss.css');
 		}
-		else // if no Picss was found, show a page not found message
+		else // if no Picss was found, show a Picss not found message
 		{
-			$f3->set('id', $id);
 			$f3->set('pageTitle', ':( Not found');
 			$f3->set('content', 'notfound.htm');	
 		}
@@ -60,7 +69,6 @@ class Picss extends AppBase {
 			// set the newpicss attributes with those existing in the POST request
 			$newpicss->set('name', $f3->get('POST.name'));
 			$newpicss->set('label', $f3->get('POST.label'));
-			$newpicss->set('date', time());
 			$newpicss->set('ip', $f3->get('IP'));
 			// move uploaded files to the UPLOADS dir (i.e. /uploads)
 			$web = \Web::instance();
@@ -79,6 +87,11 @@ class Picss extends AppBase {
 			// move and rename the photo and the audio
 			// result: an image "img-{id}.jpg" and a sound "snd-{id}.mp4" in directory "{UPLOADS}/{id}/"
 			$id = $newpicss->get('_id');
+			$hashids = new Hashids\Hashids($id->{'$id'});
+			$urlId = $hashids->encrypt($id->getTimestamp());
+			$newpicss->set('urlId', $urlId);
+			$newpicss->set('date', $id->getTimestamp());
+
 			// get the full absolute path of the UPLOADS dir
 			$uploadsDir = realpath('.')."/".$f3->get('UPLOADS');
 			// create a new directory named after the new Picss ID, inside UPLOADS dir
@@ -89,6 +102,11 @@ class Picss extends AppBase {
 				$image = $f3->get('FILES')["image"];
 				$imageFile = $id."/img-".$id.".jpg";
 				// TODO use lower case values only
+				// TODO better name of thumbnail
+				$this->createThumbnail(250, $image['name'], $uploadsDir, $f3);
+				rename($uploadsDir.$image['name']."-250.jpg", $uploadsDir.$imageFile."-250.jpg");
+				$this->createThumbnail(400, $image['name'], $uploadsDir, $f3);
+				rename($uploadsDir.$image['name']."-400.jpg", $uploadsDir.$imageFile."-400.jpg");
 				rename($uploadsDir.$image['name'], $uploadsDir.$imageFile);
 				// set the image attribute in the Picss object
 				$newpicss->set('image', $imageFile);
@@ -139,6 +157,24 @@ class Picss extends AppBase {
 			$f3->set('format','application/json');
 
 		}
+	}
+
+	function createThumbnail($max, $imageName, $uploadDir, $f3) {
+		$img = new Image($imageName, false, $uploadDir);
+		$orig_w = $img->width();
+		$orig_h = $img->height();
+		$new_w = 0;
+		$new_h = 0;
+		if ($orig_w > $orig_h) {
+			$new_w = $max;
+			$new_h = $orig_h / ($orig_w / $new_w);
+		} else {
+			$new_h = $max;
+			$new_w = $orig_w / ($orig_h / $new_h);
+		}
+		$img->resize($new_w, $new_h);
+		$img->save();
+		$f3->write($uploadDir.$imageName."-".$max.".jpg", $img->dump('jpeg'));
 	}
 
 	// TODO we may need to implement these methods
