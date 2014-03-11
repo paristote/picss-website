@@ -6,45 +6,60 @@ body {
 	padding: 0;
 	margin: 0;
   background-color: #111;
+  background: url("/resources/images/bg-grid.jpeg");
 }
 
+/* layout */
 .top-row {
     min-height: 70px;
     vertical-align: middle;
     color: #EEE;
 }
 
-.gap {
-  /*background-color: ;*/
+/* report button */
+.report {
+
+}
+.report i {
+  color: #CCC;
+}
+.report i:hover {
+  color: #BBB;
 }
 
+/* back button */
 .back-button {
   background-color: #FFBB33;
   text-align: center;
 }
-
-.picss-title {
-  /*background-color: #FFBB33;*/
+.back-button i {
+  line-height: 2;
+  color: white;
+}
+.back-button i:hover {
+  color: #333;
 }
 
+/* controls */
 .controls {
+  text-align: center;
+}
+.controls i {
+  color: #999;
+  padding: 15px;
+}
+.controls i:hover {
+  color: #FFBB33;
+}
+
+/* info */
+.info {
   background-color: #FFBB33;
   text-align: center;
   padding-bottom: 3px;
 }
 
-.controls img {
-  padding: 7px;
-/*  padding-bottom: 15px;*/
-}
-
-.controls img:hover {
-  padding: 5px;
-  /*padding-bottom: 13px;*/
-  /*background-color: #FF8800;*/
-  border: 2px solid white;
-}
-
+/* picss image */
 .picss-image {
   padding: 0;
 }
@@ -53,8 +68,5 @@ body {
 	width: 100%;
 }
 
-.picss-label {
-  text-align: right;
-}
 
 
