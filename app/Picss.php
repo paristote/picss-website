@@ -56,9 +56,9 @@ class Picss extends AppBase {
 	 * Create a Picss with the form-data sent in the request
 	 */
 	function post($f3) {
-		// check whether name and label have been set
+		// check whether description is set
 		// TODO if not, return an error with an explicit description
-		if (!$f3->exists('POST.name') || !strlen($f3->get('POST.name')))
+		if (!$f3->exists('POST.description') || !strlen($f3->get('POST.description')))
 		{
 			// Name is required
 		}
@@ -67,8 +67,7 @@ class Picss extends AppBase {
 			$db=$this->db;
 			$newpicss=new DB\Mongo\Mapper($this->db,'picss');
 			// set the newpicss attributes with those existing in the POST request
-			$newpicss->set('name', $f3->get('POST.name'));
-			$newpicss->set('label', $f3->get('POST.label'));
+			$newpicss->set('name', $f3->get('POST.description'));
 			$newpicss->set('ip', $f3->get('IP'));
 			// move uploaded files to the UPLOADS dir (i.e. /uploads)
 			$web = \Web::instance();
@@ -107,7 +106,10 @@ class Picss extends AppBase {
 				rename($uploadsDir.$image['name']."-250.jpg", $uploadsDir.$imageFile."-250.jpg");
 				$this->createThumbnail(400, $image['name'], $uploadsDir, $f3);
 				rename($uploadsDir.$image['name']."-400.jpg", $uploadsDir.$imageFile."-400.jpg");
-				rename($uploadsDir.$image['name'], $uploadsDir.$imageFile);
+				$this->createThumbnail(1280, $image['name'], $uploadsDir, $f3);
+				rename($uploadsDir.$image['name']."-1280.jpg", $uploadsDir.$imageFile);
+				//rename($uploadsDir.$image['name'], $uploadsDir.$imageFile);
+				unlink($uploadsDir.$image['name']);
 				// set the image attribute in the Picss object
 				$newpicss->set('image', $imageFile);
 			}
@@ -147,7 +149,6 @@ class Picss extends AppBase {
 			$arrPicss = array(
 				'id'    => $newpicss->get('_id'),
 				'name'  => $newpicss->get('name'),
-				'label' => $newpicss->get('label'),
 				'image' => $newpicss->get('image'),
 				'sound' => $newpicss->get('sound')
 			);
